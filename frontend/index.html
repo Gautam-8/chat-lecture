@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with your Lecture</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="nav-title">
+                    <i class="fas fa-video"></i>
+                    Chat with your Lecture
+                </h1>
+                <div class="nav-actions">
+                    <button id="logout-btn" class="btn btn-secondary" style="display: none;">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Login Section -->
+            <section id="login-section" class="auth-section">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <h2>Welcome Back</h2>
+                        <form id="login-form">
+                            <div class="form-group">
+                                <label for="login-username">Username</label>
+                                <input type="text" id="login-username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password">Password</label>
+                                <input type="password" id="login-password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </form>
+                        <p class="auth-switch">
+                            Don't have an account?
+                            <a href="#" id="show-register">Register here</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Register Section -->
+            <section id="register-section" class="auth-section" style="display: none;">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <h2>Create Account</h2>
+                        <form id="register-form">
+                            <div class="form-group">
+                                <label for="register-username">Username</label>
+                                <input type="text" id="register-username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-email">Email</label>
+                                <input type="email" id="register-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-password">Password</label>
+                                <input type="password" id="register-password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </form>
+                        <p class="auth-switch">
+                            Already have an account?
+                            <a href="#" id="show-login">Login here</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="dashboard" style="display: none;">
+                <div class="dashboard-container">
+                    <!-- Sidebar -->
+                    <aside class="sidebar">
+                        <div class="sidebar-header">
+                            <h3>Your Lectures</h3>
+                            <button id="upload-btn" class="btn btn-primary">
+                                <i class="fas fa-plus"></i>
+                                Upload Video
+                            </button>
+                        </div>
+                        <div class="lecture-list" id="lecture-list">
+                            <!-- Lectures will be populated here -->
+                        </div>
+                    </aside>
+
+                    <!-- Main Content Area -->
+                    <div class="content-area">
+                        <!-- Upload Modal -->
+                        <div id="upload-modal" class="modal" style="display: none;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3>Upload Lecture Video</h3>
+                                    <button id="close-upload-modal" class="close-btn">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <form id="upload-form" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="video-title">Lecture Title</label>
+                                        <input type="text" id="video-title" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="video-description">Description (optional)</label>
+                                        <textarea id="video-description" rows="3"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="video-file">Video File</label>
+                                        <input type="file" id="video-file" accept="video/*" required>
+                                        <small class="form-help">Supported formats: MP4, AVI, MOV, MKV</small>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="button" id="cancel-upload"
+                                            class="btn btn-secondary">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Upload</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Welcome Screen -->
+                        <div id="welcome-screen" class="welcome-screen">
+                            <div class="welcome-content">
+                                <i class="fas fa-video welcome-icon"></i>
+                                <h2>Welcome to Chat with your Lecture</h2>
+                                <p>Upload your lecture videos and start having conversations with the content using AI.
+                                </p>
+                                <div class="welcome-features">
+                                    <div class="feature">
+                                        <i class="fas fa-upload"></i>
+                                        <h4>Upload Videos</h4>
+                                        <p>Upload your lecture recordings in various formats</p>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-comments"></i>
+                                        <h4>AI Chat</h4>
+                                        <p>Ask questions and get answers from your lecture content</p>
+                                    </div>
+                                    <div class="feature">
+                                        <i class="fas fa-clock"></i>
+                                        <h4>Timestamp Links</h4>
+                                        <p>Jump to specific moments in your videos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Interface -->
+                        <div id="chat-interface" class="chat-interface" style="display: none;">
+                            <div class="chat-header">
+                                <h3 id="current-lecture-title">Lecture Title</h3>
+                                <div class="chat-actions">
+                                    <button id="summarize-btn" class="btn btn-secondary">
+                                        <i class="fas fa-list"></i>
+                                        Summarize
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="chat-messages" id="chat-messages">
+                                <!-- Messages will be populated here -->
+                            </div>
+
+                            <div class="chat-input">
+                                <form id="chat-form">
+                                    <input type="text" id="chat-input-field"
+                                        placeholder="Ask a question about this lecture..." required>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay" style="display: none;">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Processing...</p>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+
+</html>
