@@ -1,5 +1,3 @@
-# 🎓 Lecture Intelligence App
-
 A Streamlit-based tool that lets you upload lecture videos, transcribe them using AI, and ask questions about the content using RAG (Retrieval-Augmented Generation).
 
 ---
@@ -12,7 +10,6 @@ A Streamlit-based tool that lets you upload lecture videos, transcribe them usin
 - ✂️ Chunk and store transcript into vector DB (Chroma)
 - 🤖 Ask questions and get answers using local LLM
 - 🗂 View video and timestamped transcript side-by-side
-- ⏩ Jump to video segments from transcript
 
 ---
 
