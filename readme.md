@@ -44,5 +44,5 @@ pip install -r requirements.txt
 
 
 ```run
-streamlite run ap
+streamlite run app.py
 ````
